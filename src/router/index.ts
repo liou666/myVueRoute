@@ -1,14 +1,21 @@
 import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
+import VueRouter, { RouterOptions } from "../my-vue-router";
 import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
-const routes: Array<RouteConfig> = [
+const routes: Array<RouterOptions> = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
+    children: [
+      {
+        path: "tab",
+        name: "Tab",
+        component: () => import("../views/Tab.vue"),
+      },
+    ],
   },
   {
     path: "/about",
@@ -22,8 +29,8 @@ const routes: Array<RouteConfig> = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
+  //   mode: "hash",
+  //   base: process.env.BASE_URL,
   routes,
 });
 
