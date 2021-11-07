@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <h1>This is a home page</h1>
-    <!-- <router-link to="/home/tab">Tab</router-link>
-    <router-view></router-view> -->
+    <my-router-link to="/home/tab">Tab</my-router-link>
+    <my-router-view></my-router-view>
     <hr />
   </div>
 </template>

@@ -51,7 +51,7 @@ export class HashHistory {
 
   handleHashChange(): void {
     window.addEventListener("hashchange", () => {
-      this.goPath(location.hash);
+      this.goPath(location.hash.slice(1));
     });
   }
 
@@ -59,6 +59,8 @@ export class HashHistory {
   goPath(path: string): void {
     const currentRoute = createMatcher(path, this.routes.routerOptions);
     (this.cb as (_router: CurrentRoute) => void)(currentRoute);
+    this.current = currentRoute
+
   }
 
   listener(cb: (_router: CurrentRoute) => void): void {

@@ -31,7 +31,7 @@ interface CurrentRoute {
 
 import { install } from "./install";
 import { HashHistory } from "./history/hashHistory";
-import Vue from "vue";
+// import Vue from "vue";
 
 export default class MyVueRouter {
   routerOptions: Array<RouterOptions>; //路由匹配规则配置选项
