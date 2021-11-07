@@ -1,43 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-interface RouteMap {
-  path: string;
-  parent: null | RouteMap;
-  component: any;
-}
-
-interface CurrentRoute {
-  path: string;
-  matched: Array<RouteMap> | [];
-}
-
-interface RouterOptions {
-  path: string;
-  name?: string;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  component: any;
-  children?: Array<RouterOptions>;
-  parent?: RouterOptions | null;
-}
-
-interface RouteMap {
-  path: string;
-  parent: null | RouteMap;
-  component: any;
-}
-
-interface Matcher {
-  pathList: string[];
-  pathMap: any;
-}
-
-import MyVueRouter from "../index";
+import MyVueRouter from "@/my-vue-router";
+import { CurrentRoute, RouterOptions, RouteMap, Matcher } from "../interface";
 
 export class HashHistory {
-  current: CurrentRoute = { path: "/", matched: [] };
+  current: CurrentRoute = addRoute(null, { path: '/' });
   cb: null | ((_router: CurrentRoute) => void);
   constructor(public routes: MyVueRouter) {
     this.routes = routes; //储存router对象
-    this.setHashUrl();
+    this.setHashUrl();//将url处理为hash形式
     this.handleHashChange();
     this.cb = null;
   }
@@ -57,10 +26,9 @@ export class HashHistory {
 
   //url改变之后路由跳转
   goPath(path: string): void {
-    const currentRoute = createMatcher(path, this.routes.routerOptions);
+    const currentRoute = getCurrentRoute(path, this.routes.routerOptions);
     (this.cb as (_router: CurrentRoute) => void)(currentRoute);
     this.current = currentRoute
-
   }
 
   listener(cb: (_router: CurrentRoute) => void): void {
@@ -68,14 +36,13 @@ export class HashHistory {
   }
 }
 
-function createMatcher(
+function getCurrentRoute(
   currentPath: string,
   router: Array<RouterOptions>
 ): CurrentRoute {
   const { pathMap } = createRouteMap(router);
 
-  let record: Array<any> | undefined = [];
-  record = pathMap[currentPath];
+  const record: RouteMap | undefined = pathMap[currentPath];
   const currentPathMap = {
     path: currentPath,
   };
@@ -116,9 +83,7 @@ function createRouteMap(router: Array<RouterOptions>): Matcher {
   };
 }
 
-// function getMatchedRoutes(path: string): CurrentRoute {}
-
-function addRoute(record: any, current: any): CurrentRoute {
+function addRoute(record: RouteMap | null, current: { path: string }): CurrentRoute {
   const res: Array<any> = [];
 
   if (record) {

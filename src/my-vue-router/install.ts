@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 import Link from "./components/Link";
 import View from "./components/View";
 
@@ -14,7 +12,6 @@ export function install(Vue: any) {
             if (this.$options.router) {
                 this._routerRoot = this;
                 this.$router = this.$options.router;
-
                 this.$router.init(this);
                 Vue.util.defineReactive(this, "_route", this.$router.history.current)
             } else {

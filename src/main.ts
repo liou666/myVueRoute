@@ -6,7 +6,7 @@ import router from './router'
 Vue.config.productionTip = false;
 
 
-const _Vue = Vue as any
+const _Vue = Vue as any //定义为any类型，仅仅是防止ts函数重载错误。
 
 new _Vue({
   router,
