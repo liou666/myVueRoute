@@ -1,26 +1,20 @@
 export default {
-    name: "RouterView",
-    render: function (h: any): any {
+  name: "RouterView",
+  render: function (h: any): any {
+    (this as any).isRouterViewComponent = true;
 
+    let parent = (this as any).$parent;
+    let deep = 0;
 
-        (this as any).isRouterViewComponent = true
+    const { matched } = (this as any).$route;
 
-        let parent = (this as any).$parent;
-        let deep = 0;
+    while (parent) {
+      if (parent.isRouterViewComponent) {
+        deep++;
+      }
+      parent = parent.$parent;
+    }
 
-        const { matched } = (this as any).$route;
-
-
-        while (parent) {
-            if (parent.isRouterViewComponent) {
-                deep++
-            }
-            parent = parent.$parent
-        }
-
-
-        return matched[deep] ? h(matched[deep].component) : h()
-
-    },
-
-}
+    return matched[deep] ? h(matched[deep].component) : h();
+  },
+};

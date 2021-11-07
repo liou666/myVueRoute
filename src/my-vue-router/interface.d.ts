@@ -1,27 +1,27 @@
 export interface CurrentRoute {
-    path: string;
-    matched: Array<RouteMap> | [];
+  path: string;
+  matched: Array<RouteMap> | [];
 }
 
 export interface RouterOptions {
-    path: string;
-    name?: string;
-    component: any;
-    children?: Array<RouterOptions>;
-    parent?: RouterOptions | null;
+  path: string;
+  name?: string;
+  component: any;
+  children?: Array<RouterOptions>;
+  parent?: RouterOptions | null;
 }
 
 export interface RouteMap {
-    path: string;
-    parent: null | RouteMap;
-    component: any;
+  path: string;
+  parent: null | RouteMap;
+  component: any;
 }
 export interface Matcher {
-    pathList: string[];
-    pathMap: any;
+  pathList: string[];
+  pathMap: any;
 }
 
 export interface RouterConfig {
-    mode?: string;
-    routes: Array<RouterOptions>;
+  mode?: string;
+  routes: Array<RouterOptions>;
 }

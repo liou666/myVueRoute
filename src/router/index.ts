@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 import VueRouter from "@/my-vue-router";
-import { RouterOptions } from "@/my-vue-router/interface"
+import { RouterOptions } from "@/my-vue-router/interface";
 
 import Home from "../views/Home.vue";
 

@@ -2,11 +2,11 @@ import MyVueRouter from "@/my-vue-router";
 import { CurrentRoute, RouterOptions, RouteMap, Matcher } from "../interface";
 
 export class HashHistory {
-  current: CurrentRoute = addRoute(null, { path: '/' });
+  current: CurrentRoute = addRoute(null, { path: "/" });
   cb: null | ((_router: CurrentRoute) => void);
   constructor(public routes: MyVueRouter) {
     this.routes = routes; //储存router对象
-    this.setHashUrl();//将url处理为hash形式
+    this.setHashUrl(); //将url处理为hash形式
     this.handleHashChange();
     this.cb = null;
   }
@@ -28,7 +28,7 @@ export class HashHistory {
   goPath(path: string): void {
     const currentRoute = getCurrentRoute(path, this.routes.routerOptions);
     (this.cb as (_router: CurrentRoute) => void)(currentRoute);
-    this.current = currentRoute
+    this.current = currentRoute;
   }
 
   listener(cb: (_router: CurrentRoute) => void): void {
@@ -83,7 +83,10 @@ function createRouteMap(router: Array<RouterOptions>): Matcher {
   };
 }
 
-function addRoute(record: RouteMap | null, current: { path: string }): CurrentRoute {
+function addRoute(
+  record: RouteMap | null,
+  current: { path: string }
+): CurrentRoute {
   const res: Array<any> = [];
 
   if (record) {
